@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simplified Flanker Task</title>
+        <script src="jspsych-6.3.1/jspsych.js"></script>
+        <script src="jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
+        <link href="jspsych-6.3.1/css/jspsych.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+    </body>
+    <script>
+        // generate a random subject ID with 15 characters
+      var subject_id = jsPsych.randomization.randomID(15);
+
+// pick a random condition for the subject at the start of the experiment
+      var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['Plain', 'Bold'], 1)[0];
+
+// record the condition assignment in the jsPsych data
+// this adds a property called 'subject' and a property called 'condition' to every trial
+          jsPsych.data.addProperties({
+            subject: subject_id,
+            condition: condition_assignment
+          });
+        /*set up welcome block*/
+        var welcome = {
+          type: "html-keyboard-response",
+          stimulus: "Welcome to the experiment. Press any key to begin."
+        };
+
+        /*set up instructions block*/
+        var instructions = {
+          type: "html-keyboard-response",
+          stimulus: "<p>In this task, you will see five arrows on the screen, like the example below.</p>"+
+            ">><>>"+
+            "<p>Press the left arrow key if the middle arrow is pointing left. (<)</p>"+
+            "<p>Press the right arrow key if the middle arrow is pointing right. (>)</p>"+
+            "<p>Press any key to begin.</p>",
+          post_trial_gap: 1000
+        };
+
+        /*defining stimuli*/
+        var test_stimuli = [
+          {
+            stimulus_plain: "<<<<<",
+            stimulus_bold: "<<<b><</b><<",
+            stim_type: 'congruent', 
+            direction: 'left'
+          },
+          {
+            stimulus_plain: ">>>>>",
+            stimulus_bold: ">><b>></b>>>",
+            stim_type: 'congruent',
+            direction: 'right'
+          },
+          {
+            stimulus_plain: ">><>>",
+            stimulus_bold: ">><b><</b>>>",
+            stim_type: 'incongruent', 
+            direction: 'right'
+          },
+          {
+            stimulus_plain: "<<<<<",
+            stimulus_bold: "<<<b><</b><<",
+            stim_type: 'incongruent', 
+            direction: 'left'
+          }
+        ];
+
+        /* defining test timeline */
+        var test = {
+          timeline: [{
+            type: 'html-keyboard-response',
+            choices: ['ArrowLeft', 'ArrowRight'],
+            trial_duration: 1500,
+            stimulus: function(){
+              if(condition_assignment == "Bold"){
+                return jsPsych.timelineVariable('stimulus_bold', true)
+              }
+              else{
+                return jsPsych.timelineVariable('stimulus_plain', true)
+              }
+                },
+            post_trial_gap: 1500
+          }],
+          timeline_variables: test_stimuli,
+          sample: {type: 'fixed-repetitions', size: 2}
+        };
+
+        /*defining debriefing block*/
+        var debrief = {
+          type: "html-keyboard-response",
+          stimulus:"<p>Press any key to complete the experiment. Thank you!</p>"
+        };
+
+
+        /*set up experiment structure*/
+        var timeline = [];
+        timeline.push(welcome);
+        timeline.push(instructions);
+        timeline.push(test);
+        timeline.push(debrief);
+
+        /*start experiment*/
+        jsPsych.init({
+            timeline: timeline,
+            on_finish: function() {
+                jsPsych.data.displayData();
+            }
+        });
+    </script>
+</html>
