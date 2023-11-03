@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flanker</title>
+    <script src="https://unpkg.com/jspsych@7.3.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-categorize-html@1.1.2"></script>
+    <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body></body>
+  <script>
+
+    /* initialize jsPsych */
+    var jsPsych = initJsPsych({
+      on_finish: function() {
+        jsPsych.data.displayData();
+      }
+    });
+
+    /* create timeline */
+    var timeline = [];
+
+
+
+    /* define consent form */
+
+    var consent_form = {
+    type: jsPsychSurveyMultiSelect,
+    preamble: "<p>These are the conditions of participation</p>",
+    questions: [
+    {
+        
+      prompt: "Do you agree?", 
+      options: ["Yes"], 
+      horizontal: true,
+      required: true,
+      name: 'Consent'
+    }
+    ]
+    }
+    timeline.push(consent_form)
+	
+	 /* instructions */
+
+
+    var instructions = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: "Please press the left arrow if the arrow points left and the right arrow if it points right. <br> Press any key to continue"
+    }
+    timeline.push(instructions)
+
+
+
+
+    var flanker = {
+        timeline : [
+            {
+                type:jsPsychHtmlKeyboardResponse,
+                stimulus: "+",
+                trial_duration: 500,
+                choices: "NO_KEYS"
+            },
+            {
+        type: jsPsychCategorizeHtml,
+        stimulus: jsPsych.timelineVariable('stimulus'),
+        key_answer: jsPsych.timelineVariable('key_answer'),
+        correct_text: "Correct!",
+        incorrect_text: "Incorrect",
+        choices: ["ArrowRight", "ArrowLeft"],
+		trial_duration: 2000
+            } 
+        ],
+        timeline_variables : [
+            {stimulus: "<<<<<", key_answer: "ArrowLeft"},
+            {stimulus: "<<><<", key_answer: "ArrowRight"},
+            {stimulus: ">>>>>", key_answer: "ArrowRight"},
+            {stimulus: ">><>>", key_answer: "ArrowLeft"}
+        ],
+        randomize_order: true
+
+    }
+    timeline.push(flanker)
+    /* start the experiment */
+    jsPsych.run(timeline);
+
+  </script>
+</html>
