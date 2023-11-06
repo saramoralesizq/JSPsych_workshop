@@ -1,5 +1,5 @@
 # JSPsych_workshop
-As a complement to the video and powerpoint presentation to make up for the part that was not recorded, I have uploaded here a description and explanation of the steps followed in the workshop.
+As a complement to the video and to the powerpoint presentation, and to make up for the part that was not recorded, I have uploaded here a description and explanation of the steps followed in the workshop.
 
 This page contains the coding for the jsPsych workshop. It is divided in two parts:
 
