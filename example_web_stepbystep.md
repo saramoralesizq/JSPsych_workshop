@@ -129,6 +129,7 @@ If you refresh the page now, you should see that the text and picture have both 
 </html>
 ```
 # Adding interactivity with JavaScript
+## Basics of JavaScript
 For most experiments, we need the content of a webpage to change over time and respond to participants’ actions. For that, we can use JavaScript. This language is the most similar to other programming languages, such as R or Python. It uses variables and functions. 
 
 For example, this is how you declare a variable:
@@ -168,4 +169,57 @@ The outcome would be 6, because x is 2, y[0] is 1 and z.number is 3.
 
 Same as with CSS, if we want to include JavaScript it our webpage, we can either add a link to a separate JavaScript file in the _head_ of our wepage, or add the javaScript content inside our HTML file.
 
-In this case, we will choose the second option. All of the content included inside the script tag will be read as JavaScript.
+In this case, we will choose the second option. All of the content included inside the _script_ tag will be read as JavaScript.
+
+## JavaScript in action
+How can we use JavaScript in the webpage we have created so far?
+
+First we will add a button to our page. We do this by adding the following button tag:
+```
+<button id = "Next" onclick="hide_dog()">Continue</button></div>
+```
+Here "Continue" is the text that will be displayed inside the button. Next is the identifier of the button. We have also established that when people click the button, the function named "hide_dog()" will be executed. However, we have not yet defined that function.
+
+This function will hide the picture of the dog. To define it, we can add this within our script tags:
+```
+function hide_dog(){
+	doggy.style.display = "none";
+}
+```
+That way, when someone presses the "Continue" button, the dog will disappear.
+This is the code so far:
+
+```
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dog page</title>
+        <script src="script/script.js"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+       <div id="hello"><p>Something else</p><br>
+	   <img id="doggy" src="img/George.png"><br>
+	   <button id = "Next" onclick="hide_dog()">Continue</button></div>
+    </body>
+    <script>
+function hide_dog(){
+	doggy.style.display = "none";
+}
+
+    </script>
+    <style>
+#hello{
+    font-size:30pt; 
+    text-align:center;
+}
+
+#doggy{
+    height: 200px; 
+    width: 280px;
+}
+   </style>
+</html>
+```
+
+You can also find it inside the "Example_web" folder. And those are teh basics of web programming. Now, to learn how to use this to run your jsPsych studies, go to the step-by-step tutorial for jsPsych, in the Read.me document.
