@@ -130,7 +130,42 @@ If you refresh the page now, you should see that the text and picture have both 
 ```
 # Adding interactivity with JavaScript
 For most experiments, we need the content of a webpage to change over time and respond to participants’ actions. For that, we can use JavaScript. This language is the most similar to other programming languages, such as R or Python. It uses variables and functions. 
+
 For example, this is how you declare a variable:
 ```
-var 
+var x = 2
 ```
+You can also create an array, a list of elements:
+
+```
+var y = [1, 2, 6]
+```
+To recall the elements from an array, you use this code, calling the first element 0, the second, 1, etc.
+
+```
+y[0]
+```
+Here, the outcome would be 1, which is the first element of the _y_ array.
+Equally, this is how you create an object. This is another type of list in which each element is labeled.
+
+```
+var z = {
+        name: "variable z",
+        number: 3}
+```
+To recall an item from the variable z, this is what we do:
+
+```
+z.number
+```
+The outcome here would be 3 (the element of the object labeled number)
+
+Let's see this in practise. If we run this:
+```
+var i = x + y[0] + z.number
+```
+The outcome would be 6, because x is 2, y[0] is 1 and z.number is 3.
+
+Same as with CSS, if we want to include JavaScript it our webpage, we can either add a link to a separate JavaScript file in the _head_ of our wepage, or add the javaScript content inside our HTML file.
+
+In this case, we will choose the second option. All of the content included inside the script tag will be read as JavaScript.
