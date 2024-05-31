@@ -39,7 +39,7 @@ If we save this file and open it with a browser (e.g. Chrome) we should see that
 
 
 # Other elements in HTML
-Now, we are going to explore how to include other elements in our page. We are going to start by placing our text inside a <div>. This is a container. It won’t change the appearance of our text, but it will make it easier to recall it and manipulate it later on. We will include an id (identifier) naming the div hello.
+Now, we are going to explore how to include other elements in our page. We are going to start by placing our text inside a "div". This is a container. It won’t change the appearance of our text, but it will make it easier to recall it and manipulate it later on. We will include an id (identifier) naming the div hello.
 ```
 <!DOCTYPE html>
 <html>
