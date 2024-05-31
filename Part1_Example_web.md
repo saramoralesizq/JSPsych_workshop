@@ -17,7 +17,7 @@ Once you have created your html file, you can copy paste this to create an empty
     </body>
 </html>
 ```
-All the content in HTML is placed in between tags. This would be an opening tag <tag> and this would be a closing tag </tag>.
+All the content in HTML is placed in between tags. This would be an opening tag <> and this would be a closing tag </>.
 A webpage has two main elements, the head and the body.
 ## Head
 The head contains the links to other files. For example, if you have a separate file with the styling code in css or a javascript file, this is where you include the path to them. This will also be where you load your jsPsych library and plugins.
